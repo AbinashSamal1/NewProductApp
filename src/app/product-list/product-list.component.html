@@ -1,0 +1,67 @@
+<app-product-nav-bar></app-product-nav-bar>
+<div class="container-fluid bg-info">
+  <div class="row">
+    <ng-container *ngFor="let item of productList">
+      <div class="card card-sm mx-auto bg-danger" style="width: 16rem">
+        <img
+          class="card-img-top"
+          src="{{ item.imageUrl }}"
+          alt="Card image cap"
+        />
+        <div class="card-body bg-warning">
+          <a
+            class="card-title itemdata h5"
+            [title]="item.productName + ' details'"
+            routerLink="/products/{{ item.productId }}/details"
+          >
+            {{ item.productName | uppercase }}
+          </a>
+          <div class="card-text">
+            <div class="itemdata">
+              <span class="h6"> Product details:</span> {{ item.description }}
+            </div>
+            <div><span class="h6">ID:</span> {{ item.productId }}</div>
+            <div><span class="h6"> Price:</span> ₹{{ item.price }}</div>
+            <div><span class="h6">Rating:</span>{{ item.rating }}</div>
+            <div>
+              <span class="h6"> Created Date:</span
+              >{{ item.createdDate | date: "d MMM, y, h:mm a" }}
+            </div>
+            <div>
+              <span class="h6"> Release Date:</span
+              >{{ item.releaseDate | date: "d MMM, y, h:mm a" }}
+            </div>
+            <div>
+              <span class="h6"> Last Update Date:</span
+              >{{ item.lastUpdatedDate | date: "d MMM, y, h:mm a" }}
+            </div>
+            <div><span class="h6">Active:</span>{{ item.isActive }}</div>
+          </div>
+          <div>
+            <div *ngIf="item.isActive == true; else elseBlock">
+              <button href="" class="btn btn-outline-danger">Deactivate</button>
+            </div>
+            <ng-template #elseBlock>
+              <button href="" class="btn btn-outline-primary">Activate</button>
+            </ng-template>
+          </div>
+
+          <div class="mt-2 row">
+            <div class="col-md-4">
+              <button
+                href="../edit-product/edit-product.component.html"
+                class="btn btn-primary m-1"
+                routerLink="/products/{{ item.productId }}/edit"
+              >
+                Edit
+              </button>
+            </div>
+            <div class="col-md-4">
+              <button href="" class="btn btn-danger m-1">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
