@@ -39,7 +39,13 @@
           </div>
           <div>
             <div *ngIf="item.isActive == true; else elseBlock">
-              <button href="" class="btn btn-outline-danger" (click)="deActivateProd(item.productId,item.productName)">Deactivate</button>
+              <button
+                href=""
+                class="btn btn-outline-danger"
+                (click)="deActivateProd(item.productId, item.productName)"
+              >
+                Deactivate
+              </button>
             </div>
             <ng-template #elseBlock>
               <button
@@ -76,5 +82,8 @@
         </div>
       </div>
     </ng-container>
+    <button class="btn btn-dark w-100" (click)="loadMore()" *ngIf="display">
+      Load More >>
+    </button>
   </div>
 </div>

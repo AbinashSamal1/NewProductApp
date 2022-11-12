@@ -10,6 +10,8 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductListComponent implements OnInit {
   productList: Product[] = [];
+  pageNum: number = 1;
+  display: boolean = true;
 
   constructor(
     private api: ProductService,
@@ -21,7 +23,7 @@ export class ProductListComponent implements OnInit {
     this.loadProduct();
   }
   loadProduct() {
-    this.api.getProduct().subscribe((res) => {
+    this.api.getProduct(this.pageNum).subscribe((res) => {
       this.productList = res;
     });
   }
@@ -62,5 +64,17 @@ export class ProductListComponent implements OnInit {
       },
       () => {}
     );
+  }
+  loadMore() {
+    this.pageNum += 1;
+    this.api.getProduct(this.pageNum).subscribe((res) => {
+      // console.log(res.length);
+      console.log(res.length);
+      if (res.length != 0) {
+        this.productList = this.productList.concat(res);
+      } else {
+        this.display = false;
+      }
+    });
   }
 }

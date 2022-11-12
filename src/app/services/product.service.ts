@@ -11,12 +11,13 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  getProduct(): Observable<Product[]> {
+  getProduct(pageNumber: number): Observable<Product[]> {
     return this.http.get<Product[]>(
-      'http://www.dummyproducts.com/api/Products?rowsPerPage=10&pageNumber=1'
+      'http://www.dummyproducts.com/api/Products?rowsPerPage=10&pageNumber=' +
+        pageNumber
     );
   }
-  delete(productId: number,data:any) {
+  delete(productId: number, data: any) {
     return this.http.delete<any>(
       'http://www.dummyproducts.com/api/Products/' + productId
     );
@@ -27,4 +28,5 @@ export class ProductService {
   deActivate(productId: number) {
     return this.http.post(this.url + productId + '/deactivate', {});
   }
+  loadData() {}
 }
