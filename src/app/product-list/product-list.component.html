@@ -39,10 +39,16 @@
           </div>
           <div>
             <div *ngIf="item.isActive == true; else elseBlock">
-              <button href="" class="btn btn-outline-danger">Deactivate</button>
+              <button href="" class="btn btn-outline-danger" (click)="deActivateProd(item.productId,item.productName)">Deactivate</button>
             </div>
             <ng-template #elseBlock>
-              <button href="" class="btn btn-outline-primary">Activate</button>
+              <button
+                href=""
+                class="btn btn-outline-primary"
+                (click)="activateProduct(item.productId, item.productName)"
+              >
+                Activate
+              </button>
             </ng-template>
           </div>
 
@@ -57,7 +63,14 @@
               </button>
             </div>
             <div class="col-md-4">
-              <button href="" class="btn btn-danger m-1">Delete</button>
+              <button
+                href=""
+                class="btn btn-danger m-1"
+                (click)="deleteProduct(item.productId, item.productName)"
+                (click)="deleteConf(item.productName)"
+              >
+                Delete
+              </button>
             </div>
           </div>
         </div>
